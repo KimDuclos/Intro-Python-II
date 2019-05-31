@@ -1,8 +1,9 @@
 # Implement a class to hold room information. This should have name and
 # description attributes.
 
+
 class Room:
-    def __init__(self, name, description, n_to = None, s_to = None, e_to = None, w_to = None, items = None):
+    def __init__(self, name, description, n_to=None, s_to=None, e_to=None, w_to=None, items=None):
         self.name = name
         self.description = description
         self.n_to = n_to
@@ -10,5 +11,6 @@ class Room:
         self.e_to = e_to
         self.w_to = w_to
         self.items = items
+
     def __str__(self):
         return str(self.__dict__)
