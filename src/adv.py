@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from items import Item
 
 # Declare all the rooms
 
@@ -33,11 +35,19 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
-#
-# Main
-#
 
-# Make a new player object that is currently in the 'outside' room.
+# Create Items
+
+item = {
+    'dust':  Item('Dust',
+                  'You have no need to use dust at this time.')
+}
+
+# Items in rooms
+
+room['foyer'].items = item['dust']
+
+# Main
 
 # Write a loop that:
 #
@@ -49,3 +59,23 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+player = Player(input('Enter your name here: '), room['outside'], [])
+player.display_room()
+action = input(
+    'Move North(n), South(s), East(e), or West(w) \nItem Action(i) \nQuit Game(q)\n\n')
+player.action_input(action)
+
+while True:
+    if action == 'q':
+        break
+    elif player.current_room is not None:
+        player.display_room()
+        player.if_player_sees_item()
+        action = input(
+            'Move North(n), South(s), East(e), or West(w) \nItem Action(i) \nQuit Game(q)\n\n')
+        player.action_input(action)
+        continue
+    else:
+        print('No room exists here. Please choose another direction.')
